@@ -18,6 +18,7 @@ options:
   output_dir: "/media/frigateconnect"
   max_clip_duration: 300
   video_profile: "compatible"
+  timezone: "Europe/Berlin"
 schema:
   frigate_url: url
   poll_interval: int(10,3600)
@@ -25,3 +26,4 @@ schema:
   output_dir: str
   max_clip_duration: int(30,3600)
   video_profile: "list(compatible|passthrough)"
+  timezone: str

@@ -59,7 +59,7 @@ def reencode_clip(input_path: str, output_path: str) -> None:
 
 def build_filename(camera: str, start_time: float, alert_id: str) -> str:
     """Build a descriptive filename for the exported clip."""
-    dt = datetime.fromtimestamp(start_time, tz=timezone.utc)
+    dt = datetime.fromtimestamp(start_time)
     ts = dt.strftime("%Y%m%d_%H%M%S")
     short_id = alert_id[:8]
     return f"{camera}_{ts}_{short_id}.mp4"

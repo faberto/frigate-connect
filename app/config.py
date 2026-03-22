@@ -23,6 +23,7 @@ class Config:
     output_dir: str
     max_clip_duration: int
     video_profile: str  # "compatible" or "passthrough"
+    timezone: str
 
     @classmethod
     def load(cls) -> Config:
@@ -41,4 +42,5 @@ class Config:
             output_dir=opts.get("output_dir", os.environ.get("OUTPUT_DIR", "/media/frigateconnect")),
             max_clip_duration=int(opts.get("max_clip_duration", os.environ.get("MAX_CLIP_DURATION", "300"))),
             video_profile=opts.get("video_profile", os.environ.get("VIDEO_PROFILE", "compatible")),
+            timezone=opts.get("timezone", os.environ.get("TZ", "Europe/Berlin")),
         )
