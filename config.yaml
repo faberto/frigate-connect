@@ -1,0 +1,27 @@
+name: "Frigate Connect"
+version: "0.1.0"
+slug: "frigateconnect"
+description: "Export Frigate alert clips as universally compatible MP4 videos"
+arch:
+  - aarch64
+  - amd64
+startup: services
+boot: auto
+init: false
+stage: experimental
+map:
+  - media:rw
+options:
+  frigate_url: "http://ccab4aaf-frigate-fa:5000"
+  poll_interval: 60
+  clip_padding: 10
+  output_dir: "/media/frigateconnect"
+  max_clip_duration: 300
+  video_profile: "compatible"
+schema:
+  frigate_url: url
+  poll_interval: int(10,3600)
+  clip_padding: int(0,60)
+  output_dir: str
+  max_clip_duration: int(30,3600)
+  video_profile: "list(compatible|passthrough)"

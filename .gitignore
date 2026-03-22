@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+ai-resources/
+.claude/
+/data/
+exports/
+state.json
+deploy.sh
+*.mp4

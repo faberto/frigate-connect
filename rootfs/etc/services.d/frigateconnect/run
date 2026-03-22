@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bashio
+bashio::log.info "Starting Frigate Connect..."
+cd /app
+exec uv run python3 /app/main.py
