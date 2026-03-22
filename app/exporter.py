@@ -8,6 +8,7 @@ import subprocess
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from config import Config, STATE_PATH
 from frigate_client import FrigateClient
@@ -57,9 +58,10 @@ def reencode_clip(input_path: str, output_path: str) -> None:
         raise RuntimeError(f"ffmpeg re-encode failed: {result.stderr[-500:]}")
 
 
-def build_filename(camera: str, start_time: float, alert_id: str) -> str:
+def build_filename(camera: str, start_time: float, alert_id: str, tz_name: str) -> str:
     """Build a descriptive filename for the exported clip."""
-    dt = datetime.fromtimestamp(start_time)
+    tz = ZoneInfo(tz_name)
+    dt = datetime.fromtimestamp(start_time, tz=tz)
     ts = dt.strftime("%Y%m%d_%H%M%S")
     short_id = alert_id[:8]
     return f"{camera}_{ts}_{short_id}.mp4"
@@ -96,7 +98,7 @@ def export_alert(
 
     output_dir = Path(config.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    filename = build_filename(camera, start_time, alert_id)
+    filename = build_filename(camera, start_time, alert_id, config.timezone)
     final_path = output_dir / filename
 
     with tempfile.TemporaryDirectory() as tmpdir:

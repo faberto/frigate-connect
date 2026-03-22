@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import os
 import sys
 import time
 from pathlib import Path
@@ -49,8 +48,6 @@ def poll_and_export(client: FrigateClient, config: Config) -> None:
 
 def main() -> None:
     config = Config.load()
-    os.environ["TZ"] = config.timezone
-    time.tzset()
     log.info(
         "Starting Frigate Connect: frigate_url=%s poll_interval=%ds padding=%ds profile=%s output=%s",
         config.frigate_url,
